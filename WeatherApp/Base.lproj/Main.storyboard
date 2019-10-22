@@ -44,10 +44,55 @@
                     <view key="view" contentMode="scaleToFill" id="pCU-cY-vbQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Wv-Kf-312">
+                                <rect key="frame" x="20" y="40" width="335" height="528"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellCity" id="Qom-v1-gEz">
+                                        <rect key="frame" x="0.0" y="28" width="335" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qom-v1-gEz" id="IHQ-uO-zIJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fv-fq-26j">
+                                <rect key="frame" x="159" y="593" width="57" height="30"/>
+                                <state key="normal" title="Add city"/>
+                                <connections>
+                                    <action selector="addCityButton:" destination="Y92-oC-Ib8" eventType="touchUpInside" id="SfI-dC-kqh"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write city here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIi-9U-hoX">
+                                <rect key="frame" x="20" y="568" width="335" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2Wv-Kf-312" firstAttribute="leading" secondItem="oxB-l4-DfA" secondAttribute="leading" constant="20" id="7uw-G6-bOo"/>
+                            <constraint firstItem="oxB-l4-DfA" firstAttribute="bottom" secondItem="2Wv-Kf-312" secondAttribute="bottom" constant="50" id="JY8-dJ-tct"/>
+                            <constraint firstItem="2Wv-Kf-312" firstAttribute="top" secondItem="oxB-l4-DfA" secondAttribute="top" constant="20" id="P4c-JB-e08"/>
+                            <constraint firstItem="5fv-fq-26j" firstAttribute="leading" secondItem="oxB-l4-DfA" secondAttribute="leading" constant="159" id="T8O-8X-Pvj"/>
+                            <constraint firstItem="oxB-l4-DfA" firstAttribute="bottom" secondItem="qIi-9U-hoX" secondAttribute="bottom" constant="20" id="XMQ-cX-l7e"/>
+                            <constraint firstItem="oxB-l4-DfA" firstAttribute="trailing" secondItem="2Wv-Kf-312" secondAttribute="trailing" constant="20" id="Yet-gz-Hnd"/>
+                            <constraint firstItem="5fv-fq-26j" firstAttribute="bottom" secondItem="oxB-l4-DfA" secondAttribute="bottom" constant="5" id="bzT-fO-8Oe"/>
+                            <constraint firstItem="qIi-9U-hoX" firstAttribute="leading" secondItem="oxB-l4-DfA" secondAttribute="leading" constant="20" id="suZ-lh-eUL"/>
+                            <constraint firstItem="oxB-l4-DfA" firstAttribute="trailing" secondItem="5fv-fq-26j" secondAttribute="trailing" constant="159" id="vNo-QL-Ydh"/>
+                            <constraint firstItem="oxB-l4-DfA" firstAttribute="trailing" secondItem="qIi-9U-hoX" secondAttribute="trailing" constant="20" id="xsP-qi-Wi5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="oxB-l4-DfA"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Cities" id="F64-zN-MI4"/>
+                    <connections>
+                        <outlet property="addCityText" destination="qIi-9U-hoX" id="kax-tY-EfN"/>
+                        <outlet property="citiesTable" destination="2Wv-Kf-312" id="cF5-8K-5Yl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="901-Br-sM6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

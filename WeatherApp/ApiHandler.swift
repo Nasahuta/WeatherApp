@@ -15,9 +15,9 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
     
     static let APIKEY: String = "87bcbc00f1636a765c6ad5f9f6795428"
     
-    var locationManager: CLLocationManager!
+    //var locationManager: CLLocationManager!
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    /*func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("locationManager()")
         let loc = locations.last
         
@@ -25,7 +25,7 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         geocoder.reverseGeocodeLocation(loc!, completionHandler: self.done)
         
         self.locationManager.stopUpdatingLocation()
-    }
+    }*/
     
     func done(placemarks: [CLPlacemark]?, error: Error?) {
         let mark : CLPlacemark! = placemarks?[0]
@@ -34,7 +34,7 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
     }
     
     func weatherForecast(city: String) {
-        let url = "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(ApiHandler.APIKEY)"
+        let url = "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(ApiHandler.APIKEY)&units=metric"
         fetchUrl(url: url)
     }
     
@@ -54,10 +54,15 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
     func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
         let resstr = String(data: data!, encoding: String.Encoding.utf8)
         
-        print(resstr!)
+        //print(resstr!)
         // Execute stuff in UI thread
         DispatchQueue.main.async(execute: {() in
-            NSLog(resstr!)
+            do {
+                let currentWthr = try JSONDecoder().decode(WeatherObject.self, from: data!)
+                print(currentWthr.main.temp)
+            } catch {
+                print("PARSER ERROR")
+            }
         })
     }
     
@@ -67,7 +72,7 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         weatherForecast(city: "Tampere")
 
         
-        self.locationManager = CLLocationManager()
+        //self.locationManager = CLLocationManager()
         
         /*
         locationManager.delegate = self
