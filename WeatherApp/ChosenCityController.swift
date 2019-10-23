@@ -30,8 +30,9 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
         for i in 0...3 {
             if i == 0 {
                 data.append("Use GPS")
+            } else {
+                data.append("\(i)")
             }
-            data.append("\(i)")
         }
         
         citiesTable.dataSource = self

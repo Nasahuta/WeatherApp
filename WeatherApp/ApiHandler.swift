@@ -33,26 +33,59 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         //weatherForecast(city: mark.locality!)
     }
     
-    func weatherForecast(city: String) {
+    func weatherForecast(_ city: String) {
         let url = "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(ApiHandler.APIKEY)&units=metric"
-        fetchUrl(url: url)
+        fetchUrlForecast(url: url)
     }
     
-    func fetchUrl(url : String) {
+    func currentWeather(_ city: String) {
+        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&APPID=\(ApiHandler.APIKEY)&units=metric"
+        fetchUrlCurrent(url: url)
+    }
+    
+    func fetchUrlCurrent(url : String) {
         let config = URLSessionConfiguration.default
         
         let session = URLSession(configuration: config)
         
         let url : URL? = URL(string: url)
         
-        let task = session.dataTask(with: url!, completionHandler: doneFetching);
+        let task = session.dataTask(with: url!, completionHandler: doneFetchingCurrent);
         
         // Starts the task, spawns a new thread and calls the callback function
         task.resume();
     }
     
-    func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
-        let resstr = String(data: data!, encoding: String.Encoding.utf8)
+    func fetchUrlForecast(url : String) {
+        let config = URLSessionConfiguration.default
+        
+        let session = URLSession(configuration: config)
+        
+        let url : URL? = URL(string: url)
+        
+        let task = session.dataTask(with: url!, completionHandler: doneFetchingForecast);
+        
+        // Starts the task, spawns a new thread and calls the callback function
+        task.resume();
+    }
+    
+    func doneFetchingForecast(data: Data?, response: URLResponse?, error: Error?) {
+        //let resstr = String(data: data!, encoding: String.Encoding.utf8)
+        
+        //print(resstr!)
+        // Execute stuff in UI thread
+        DispatchQueue.main.async(execute: {() in
+            do {
+                let forecast = try JSONDecoder().decode(ForecastInfoModel.self, from: data!)
+                print(forecast.list[0].main.temp)
+            } catch {
+                print("PARSER ERROR")
+            }
+        })
+    }
+    
+    func doneFetchingCurrent(data: Data?, response: URLResponse?, error: Error?) {
+        //let resstr = String(data: data!, encoding: String.Encoding.utf8)
         
         //print(resstr!)
         // Execute stuff in UI thread
@@ -66,10 +99,16 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         })
     }
     
-    override init() {
-        super.init()
+    convenience init(WhoIsCalling: String, city: String) {
+        self.init()
         
-        weatherForecast(city: "Tampere")
+        if WhoIsCalling.elementsEqual("CurrentWeatherController") {
+            currentWeather(city)
+        } else if WhoIsCalling.elementsEqual("WeatherForecastController") {
+            weatherForecast(city)
+        } else {
+            print("Why tho...")
+        }
 
         
         //self.locationManager = CLLocationManager()

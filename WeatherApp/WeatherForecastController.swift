@@ -14,8 +14,6 @@ class WeatherForecastController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //let api = ApiHandler()
+        let api = ApiHandler(WhoIsCalling: "WeatherForecastController", city: "Tampere")
     }
-    
-    
 }
