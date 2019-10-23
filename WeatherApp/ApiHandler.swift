@@ -12,6 +12,7 @@ import CoreLocation
 class ApiHandler: NSObject, CLLocationManagerDelegate {
     
     private let operationQueue = OperationQueue()
+    var currentWthrTemp: String = "Fetching temperature"
     
     static let APIKEY: String = "87bcbc00f1636a765c6ad5f9f6795428"
     
@@ -92,23 +93,32 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         DispatchQueue.main.async(execute: {() in
             do {
                 let currentWthr = try JSONDecoder().decode(WeatherObject.self, from: data!)
+                self.currentWthrTemp = String(currentWthr.main.temp)
                 print(currentWthr.main.temp)
+                
             } catch {
                 print("PARSER ERROR")
             }
         })
+        
     }
     
-    convenience init(WhoIsCalling: String, city: String) {
+    func getCurrentTemp() -> String {
+        return self.currentWthrTemp
+    }
+    
+    convenience init(city: String) {
         self.init()
         
-        if WhoIsCalling.elementsEqual("CurrentWeatherController") {
+        
+        /*
+        if WhoIsCalling === CurrentWeatherController {
             currentWeather(city)
         } else if WhoIsCalling.elementsEqual("WeatherForecastController") {
             weatherForecast(city)
         } else {
             print("Why tho...")
-        }
+        }*/
 
         
         //self.locationManager = CLLocationManager()

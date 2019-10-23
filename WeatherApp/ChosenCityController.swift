@@ -20,23 +20,20 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    
     private var data: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        for i in 0...3 {
-            if i == 0 {
-                data.append("Use GPS")
-            } else {
-                data.append("\(i)")
-            }
-        }
+    
+        data.append("Use GPS")
+        data.append("Tampere")
+        data.append("Helsinki")
         
         citiesTable.dataSource = self
         citiesTable.delegate = self
+        
+        self.citiesTable.tableFooterView = UIView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,12 +45,10 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == data.count - 1 {
-            //data.append("Hello")
-            //data.insert("Hello", at: data.count - 1)
-            //self.citiesTable.reloadData()
-        }
-        //print("row: \(indexPath.row)")
+        
+        print("row: \(indexPath.row)")
+        print("row: \(data[indexPath.row])")
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

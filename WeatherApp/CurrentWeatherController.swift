@@ -10,9 +10,11 @@ import UIKit
 
 class CurrentWeatherController: UIViewController {
     
+    @IBOutlet weak var cityTemp: UILabel!
+    @IBOutlet weak var cityName: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let api = ApiHandler(WhoIsCalling: "CurrentWeatherController", city: "Tampere")
+        
     }
 }
