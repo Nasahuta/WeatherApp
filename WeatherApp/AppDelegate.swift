@@ -13,11 +13,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var api: ApiHandler?
+    
+    var current: CurrentWeatherController?
+    var forecast: WeatherForecastController?
+    var cities: ChosenCityController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        api = ApiHandler()
+        let navigation = window?.rootViewController as! UITabBarController
+        current = navigation.viewControllers![0] as? CurrentWeatherController
+        cities = navigation.viewControllers![1] as? ChosenCityController
+        forecast = navigation.viewControllers![2] as? WeatherForecastController
+        
+        api = ApiHandler(currentWeather: self.current!, forecast: self.forecast!)
+        
+        current?.apiHandler = api
+        forecast?.apiHandler = api
+        
+        cities?.giveClasses(currentWeather: self.current!, forecast: self.forecast!)
         
         return true
     }

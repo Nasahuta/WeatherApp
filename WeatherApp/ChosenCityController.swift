@@ -10,17 +10,34 @@ import UIKit
 
 class ChosenCityController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var currentWeather: CurrentWeatherController?
+    var forecast: WeatherForecastController?
+    
+    private var data: [String] = []
+    
     @IBOutlet weak var citiesTable: UITableView!
     @IBOutlet weak var addCityText: UITextField!
     @IBAction func addCityButton(_ sender: Any) {
-        if !addCityText.text!.elementsEqual("") {
-            data.append(addCityText.text!)
+        if !addCityText.text!.elementsEqual("") && !hasSpecialCharacters(addCityText.text!) {
+            data.append(addCityText.text!.capitalized.trimmingCharacters(in: .whitespaces))
             self.citiesTable.reloadData()
             addCityText.text = nil
         }
     }
     
-    private var data: [String] = []
+    func hasSpecialCharacters(_ searchTerm: String) -> Bool {
+        let charset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        if (searchTerm.rangeOfCharacter(from: charset.inverted) != nil) {
+            return true
+        }
+        
+        return false
+    }
+    
+    func giveClasses(currentWeather: CurrentWeatherController, forecast: WeatherForecastController) {
+        self.currentWeather = currentWeather
+        self.forecast = forecast
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +65,8 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
         
         print("row: \(indexPath.row)")
         print("row: \(data[indexPath.row])")
+        
+        currentWeather?.setCity(cityName: data[indexPath.row])
         
     }
     

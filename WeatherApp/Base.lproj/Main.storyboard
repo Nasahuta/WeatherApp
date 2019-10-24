@@ -122,10 +122,45 @@
                     <view key="view" contentMode="scaleToFill" id="4jq-D0-IRm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching city" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60K-Jn-YmB">
+                                <rect key="frame" x="20" y="40" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DS6-S8-UzN">
+                                <rect key="frame" x="20" y="81" width="335" height="517"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellForecast" id="Gpo-sh-YUw">
+                                        <rect key="frame" x="0.0" y="28" width="335" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gpo-sh-YUw" id="dPQ-LD-1A4">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DS6-S8-UzN" firstAttribute="leading" secondItem="aMM-9D-S0c" secondAttribute="leading" constant="20" id="9OK-Ys-FkW"/>
+                            <constraint firstItem="DS6-S8-UzN" firstAttribute="top" secondItem="60K-Jn-YmB" secondAttribute="bottom" constant="20" id="DjJ-Hw-Cwb"/>
+                            <constraint firstItem="60K-Jn-YmB" firstAttribute="top" secondItem="aMM-9D-S0c" secondAttribute="top" constant="20" id="GCE-xM-LKg"/>
+                            <constraint firstItem="60K-Jn-YmB" firstAttribute="leading" secondItem="aMM-9D-S0c" secondAttribute="leading" constant="20" id="NVt-BI-Vgp"/>
+                            <constraint firstItem="aMM-9D-S0c" firstAttribute="bottom" secondItem="DS6-S8-UzN" secondAttribute="bottom" constant="20" id="TKQ-LI-bUp"/>
+                            <constraint firstItem="aMM-9D-S0c" firstAttribute="trailing" secondItem="60K-Jn-YmB" secondAttribute="trailing" constant="20" id="XZv-GS-BjQ"/>
+                            <constraint firstItem="aMM-9D-S0c" firstAttribute="trailing" secondItem="DS6-S8-UzN" secondAttribute="trailing" constant="20" id="qRl-vJ-h1O"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="aMM-9D-S0c"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Forecast" id="G52-G5-9xt"/>
+                    <connections>
+                        <outlet property="forecastCityName" destination="60K-Jn-YmB" id="dy4-JJ-aIR"/>
+                        <outlet property="forecastTable" destination="DS6-S8-UzN" id="gf4-Mb-ZJE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xhh-l2-VRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

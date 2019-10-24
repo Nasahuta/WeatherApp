@@ -11,8 +11,10 @@ import CoreLocation
 
 class ApiHandler: NSObject, CLLocationManagerDelegate {
     
+    var currentWeather: CurrentWeatherController?
+    var forecast: WeatherForecastController?
+    
     private let operationQueue = OperationQueue()
-    var currentWthrTemp: String = "Fetching temperature"
     
     static let APIKEY: String = "87bcbc00f1636a765c6ad5f9f6795428"
     
@@ -27,6 +29,11 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         
         self.locationManager.stopUpdatingLocation()
     }*/
+    
+    func giveClasses(currentWeather: CurrentWeatherController, forecast: WeatherForecastController) {
+        self.currentWeather = currentWeather
+        self.forecast = forecast
+    }
     
     func done(placemarks: [CLPlacemark]?, error: Error?) {
         let mark : CLPlacemark! = placemarks?[0]
@@ -78,6 +85,7 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         DispatchQueue.main.async(execute: {() in
             do {
                 let forecast = try JSONDecoder().decode(ForecastInfoModel.self, from: data!)
+                self.forecast?.setForecastData(forecast.list)
                 print(forecast.list[0].main.temp)
             } catch {
                 print("PARSER ERROR")
@@ -93,7 +101,7 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         DispatchQueue.main.async(execute: {() in
             do {
                 let currentWthr = try JSONDecoder().decode(WeatherObject.self, from: data!)
-                self.currentWthrTemp = String(currentWthr.main.temp)
+                self.currentWeather?.setTemp(temp: String(currentWthr.main.temp))
                 print(currentWthr.main.temp)
                 
             } catch {
@@ -103,13 +111,11 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         
     }
     
-    func getCurrentTemp() -> String {
-        return self.currentWthrTemp
-    }
-    
-    convenience init(city: String) {
+    convenience init(currentWeather: CurrentWeatherController, forecast: WeatherForecastController) {
         self.init()
         
+        self.currentWeather = currentWeather
+        self.forecast = forecast
         
         /*
         if WhoIsCalling === CurrentWeatherController {
