@@ -41,7 +41,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Current Weather" id="pBG-Ti-EkN">
+                    <tabBarItem key="tabBarItem" title="Current Weather" image="current" id="pBG-Ti-EkN">
                         <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                         <inset key="largeContentSizeImageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                     </tabBarItem>
@@ -105,7 +105,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oxB-l4-DfA"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Cities" id="F64-zN-MI4"/>
+                    <tabBarItem key="tabBarItem" title="Cities" image="cities" id="F64-zN-MI4"/>
                     <connections>
                         <outlet property="addCityText" destination="qIi-9U-hoX" id="kax-tY-EfN"/>
                         <outlet property="citiesTable" destination="2Wv-Kf-312" id="cF5-8K-5Yl"/>
@@ -133,12 +133,28 @@
                                 <rect key="frame" x="20" y="81" width="335" height="517"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellForecast" id="Gpo-sh-YUw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellForecast" textLabel="WbJ-8y-lKF" detailTextLabel="r6B-4p-hlt" style="IBUITableViewCellStyleSubtitle" id="Gpo-sh-YUw">
                                         <rect key="frame" x="0.0" y="28" width="335" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gpo-sh-YUw" id="dPQ-LD-1A4">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WbJ-8y-lKF">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r6B-4p-hlt">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -156,7 +172,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aMM-9D-S0c"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Forecast" id="G52-G5-9xt"/>
+                    <tabBarItem key="tabBarItem" title="Forecast" image="forecast" id="G52-G5-9xt"/>
                     <connections>
                         <outlet property="forecastCityName" destination="60K-Jn-YmB" id="dy4-JJ-aIR"/>
                         <outlet property="forecastTable" destination="DS6-S8-UzN" id="gf4-Mb-ZJE"/>
@@ -187,4 +203,9 @@
             <point key="canvasLocation" x="144.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cities" width="25" height="25"/>
+        <image name="current" width="25" height="25"/>
+        <image name="forecast" width="25" height="25"/>
+    </resources>
 </document>

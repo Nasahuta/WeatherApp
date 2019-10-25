@@ -18,7 +18,16 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
     
     static let APIKEY: String = "87bcbc00f1636a765c6ad5f9f6795428"
     
-    //var locationManager: CLLocationManager!
+    var currentLocation: String?
+    var both: Bool = false
+    
+    var locationManager: CLLocationManager?
+    var locations : CLLocationCoordinate2D?
+    
+    var geoCoder = CLGeocoder()
+    var location : CLLocation?
+    
+    var placemark: CLPlacemark?
     
     /*func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("locationManager()")
@@ -29,6 +38,38 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         
         self.locationManager.stopUpdatingLocation()
     }*/
+    
+    func setLocation() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager?.delegate = self
+            locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager?.startUpdatingLocation()
+            
+            self.locations = self.locationManager?.location?.coordinate
+            self.location = CLLocation(latitude: (self.locations?.latitude)!, longitude: (self.locations?.longitude)!)
+            geoCoder.reverseGeocodeLocation(location!, completionHandler: {(placemarks, error) -> Void in
+                var place: CLPlacemark!
+                place = placemarks?[0]
+                self.placemark = placemarks?[0]
+                if place.locality != nil {
+                    self.currentLocation = place.locality!
+                    self.currentWeather?.setCity(cityName: place.locality!)
+                    if self.both {
+                        self.forecast?.setCity(cityName: place.locality!)
+                    }
+                    print(place.locality!)
+                } else {
+                    
+                }
+            })
+        } else {
+            currentLocation = "Tampere"
+            self.currentWeather?.setCity(cityName: currentLocation!)
+            if self.both {
+                self.forecast?.setCity(cityName: currentLocation!)
+            }
+        }
+    }
     
     func giveClasses(currentWeather: CurrentWeatherController, forecast: WeatherForecastController) {
         self.currentWeather = currentWeather
@@ -111,12 +152,14 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         
     }
     
-    convenience init(currentWeather: CurrentWeatherController, forecast: WeatherForecastController) {
+    convenience init(currentWeather: CurrentWeatherController, forecast: WeatherForecastController, locationManager: CLLocationManager) {
         self.init()
         
         self.currentWeather = currentWeather
         self.forecast = forecast
+        self.locationManager = locationManager
         
+        //setLocation()
         /*
         if WhoIsCalling === CurrentWeatherController {
             currentWeather(city)

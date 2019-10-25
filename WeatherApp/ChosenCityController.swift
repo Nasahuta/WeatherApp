@@ -10,6 +10,7 @@ import UIKit
 
 class ChosenCityController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var apiHandler: ApiHandler?
     var currentWeather: CurrentWeatherController?
     var forecast: WeatherForecastController?
     
@@ -25,6 +26,12 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    func alert() {
+        let alert = UIAlertController(title: "Alert", message: "Could not find location", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func hasSpecialCharacters(_ searchTerm: String) -> Bool {
         let charset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         if (searchTerm.rangeOfCharacter(from: charset.inverted) != nil) {
@@ -34,9 +41,10 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
         return false
     }
     
-    func giveClasses(currentWeather: CurrentWeatherController, forecast: WeatherForecastController) {
+    func giveClasses(currentWeather: CurrentWeatherController, forecast: WeatherForecastController, apiHandler: ApiHandler) {
         self.currentWeather = currentWeather
         self.forecast = forecast
+        self.apiHandler = apiHandler
     }
     
     override func viewDidLoad() {
@@ -51,6 +59,7 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
         citiesTable.delegate = self
         
         self.citiesTable.tableFooterView = UIView()
+        //alert()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,9 +74,15 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
         
         print("row: \(indexPath.row)")
         print("row: \(data[indexPath.row])")
-        
-        currentWeather?.setCity(cityName: data[indexPath.row])
-        
+        if indexPath.row == 0 {
+            apiHandler?.setLocation()
+        } else {
+            apiHandler?.currentLocation = data[indexPath.row]
+            currentWeather?.setCity(cityName: data[indexPath.row])
+            if apiHandler!.both {
+                forecast?.setCity(cityName: data[indexPath.row])
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

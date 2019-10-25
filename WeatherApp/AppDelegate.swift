@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
     var api: ApiHandler?
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var current: CurrentWeatherController?
     var forecast: WeatherForecastController?
     var cities: ChosenCityController?
+    
+    var manager : CLLocationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,12 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         cities = navigation.viewControllers![1] as? ChosenCityController
         forecast = navigation.viewControllers![2] as? WeatherForecastController
         
-        api = ApiHandler(currentWeather: self.current!, forecast: self.forecast!)
+        self.manager = CLLocationManager()
+        self.manager?.requestAlwaysAuthorization()
+        self.manager?.requestWhenInUseAuthorization()
+        
+        api = ApiHandler(currentWeather: self.current!, forecast: self.forecast!, locationManager: self.manager!)
         
         current?.apiHandler = api
         forecast?.apiHandler = api
         
-        cities?.giveClasses(currentWeather: self.current!, forecast: self.forecast!)
+        cities?.giveClasses(currentWeather: self.current!, forecast: self.forecast!, apiHandler: api!)
         
         return true
     }

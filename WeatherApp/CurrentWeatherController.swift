@@ -17,7 +17,14 @@ class CurrentWeatherController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        setCity(cityName: "Tampere")
+        //setCity(cityName: "Tampere")
+        apiHandler?.setLocation()
+    }
+    
+    func alert() {
+        let alert = UIAlertController(title: "Alert", message: "Could not find location", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func setCity(cityName: String) {
@@ -26,7 +33,7 @@ class CurrentWeatherController: UIViewController {
     }
     
     func setTemp(temp: String) {
-        self.cityTemp.text = "\(temp) C"
+        self.cityTemp.text = "\(temp) ºC"
     }
     
     func getNewCityInformation() {

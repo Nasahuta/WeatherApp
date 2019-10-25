@@ -26,9 +26,24 @@ class WeatherForecastController: UIViewController, UITableViewDataSource, UITabl
         forecastTable.dataSource = self
         forecastTable.delegate = self
         
-        self.forecastTable.tableFooterView = UIView()
+        //self.forecastTable.tableFooterView = UIView()
         
-        apiHandler?.weatherForecast("Tampere")
+        if apiHandler?.currentLocation != nil {
+            setCity(cityName: (apiHandler?.currentLocation!)!)
+        }
+        
+        apiHandler!.both = true
+        //apiHandler?.setLocation(true)
+    }
+    
+    func setCity(cityName: String) {
+        self.forecastCityName.text = cityName
+        getNewCityInformation()
+    }
+    
+    func getNewCityInformation() {
+        let configuredCityName = forecastCityName.text!.replacingOccurrences(of: " ", with: "+")
+        apiHandler?.weatherForecast(configuredCityName)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,19 +51,25 @@ class WeatherForecastController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellForecast")! //1.
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cellForecast")! //1.
         
+        if cell == nil {
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellForecast")
+        }
         
-        cell.textLabel?.text = self.forecastData[indexPath.row] //3.
+        cell.textLabel?.text = self.forecastData[indexPath.row].capitalized //3.
         cell.detailTextLabel?.text = self.forecastTime[indexPath.row]
-        print(forecastTime[indexPath.row])
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
+        //print(forecastTime[indexPath.row])
+        
         return cell //4.
     }
     
     func setForecastData(_ data: [List]) {
         forecastData = []
         for point in data {
-            forecastData.append(point.weather[0].description + " \(point.main.temp) C")
+            forecastData.append(point.weather[0].description + " \(point.main.temp) ºC")
             forecastTime.append(point.dt_txt)
         }
         
