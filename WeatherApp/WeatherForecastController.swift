@@ -51,11 +51,11 @@ class WeatherForecastController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cellForecast")! //1.
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellForecast")! //1.
         
-        if cell == nil {
+        /*if cell == nil {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellForecast")
-        }
+        }*/
         
         cell.textLabel?.text = self.forecastData[indexPath.row].capitalized //3.
         cell.detailTextLabel?.text = self.forecastTime[indexPath.row]
