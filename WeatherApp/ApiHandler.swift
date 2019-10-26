@@ -142,8 +142,8 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         DispatchQueue.main.async(execute: {() in
             do {
                 let currentWthr = try JSONDecoder().decode(WeatherObject.self, from: data!)
-                self.currentWeather?.setTemp(temp: String(currentWthr.main.temp))
-                print(currentWthr.main.temp)
+                self.currentWeather?.setData(temp: String(currentWthr.main.temp), icon: String(currentWthr.weather[0].icon))
+                print(currentWthr.weather[0].icon)
                 
             } catch {
                 print("PARSER ERROR")

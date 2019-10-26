@@ -70,6 +70,23 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
         return 1
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 {
+            return false
+        }
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            citiesTable.beginUpdates()
+            data.remove(at: indexPath.row)
+            citiesTable.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
+            citiesTable.endUpdates()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         print("row: \(indexPath.row)")

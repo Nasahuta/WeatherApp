@@ -29,15 +29,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XEq-r0-BBg">
+                                <rect key="frame" x="68" y="261" width="239" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mA2-zJ-PVQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="0GL-Yv-G2Y"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XEq-r0-BBg" secondAttribute="trailing" constant="68" id="8pc-2g-jj1"/>
                             <constraint firstItem="e7n-Yo-pkX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="DgY-SX-7eZ"/>
+                            <constraint firstItem="e7n-Yo-pkX" firstAttribute="top" secondItem="XEq-r0-BBg" secondAttribute="bottom" constant="8" id="Mnw-GX-hFC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="e7n-Yo-pkX" secondAttribute="trailing" constant="20" id="bZJ-LC-fWO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mA2-zJ-PVQ" secondAttribute="trailing" constant="20" id="cRb-a4-3av"/>
                             <constraint firstItem="mA2-zJ-PVQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="jgg-5f-Q0f"/>
+                            <constraint firstItem="XEq-r0-BBg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="68" id="kVF-zO-qxh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e7n-Yo-pkX" secondAttribute="bottom" constant="200" id="vX2-aq-443"/>
+                            <constraint firstItem="XEq-r0-BBg" firstAttribute="top" secondItem="mA2-zJ-PVQ" secondAttribute="bottom" constant="20" id="z0Z-QH-xfX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -48,6 +55,7 @@
                     <connections>
                         <outlet property="cityName" destination="mA2-zJ-PVQ" id="RQM-Nz-0P1"/>
                         <outlet property="cityTemp" destination="e7n-Yo-pkX" id="vES-aa-gwQ"/>
+                        <outlet property="weatherIcon" destination="XEq-r0-BBg" id="iZI-kk-Qvp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -12,6 +12,7 @@ class CurrentWeatherController: UIViewController {
     
     var apiHandler: ApiHandler?
     
+    @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityTemp: UILabel!
     @IBOutlet weak var cityName: UILabel!
     override func viewDidLoad() {
@@ -32,8 +33,9 @@ class CurrentWeatherController: UIViewController {
         getNewCityInformation()
     }
     
-    func setTemp(temp: String) {
+    func setData(temp: String, icon: String) {
         self.cityTemp.text = "\(temp) ºC"
+        self.weatherIcon.image = UIImage(named: "\(icon)@2x.png")
     }
     
     func getNewCityInformation() {

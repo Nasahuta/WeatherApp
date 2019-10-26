@@ -15,6 +15,7 @@ class WeatherForecastController: UIViewController, UITableViewDataSource, UITabl
     var apiHandler: ApiHandler?
     var forecastTime = [String]()
     var forecastData = [String]()
+    var forecastIcon = [String]()
     
     @IBOutlet weak var forecastCityName: UILabel!
     @IBOutlet weak var forecastTable: UITableView!
@@ -59,6 +60,7 @@ class WeatherForecastController: UIViewController, UITableViewDataSource, UITabl
         
         cell.textLabel?.text = self.forecastData[indexPath.row].capitalized //3.
         cell.detailTextLabel?.text = self.forecastTime[indexPath.row]
+        cell.imageView?.image = UIImage(named: self.forecastIcon[indexPath.row])
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         //print(forecastTime[indexPath.row])
@@ -68,9 +70,12 @@ class WeatherForecastController: UIViewController, UITableViewDataSource, UITabl
     
     func setForecastData(_ data: [List]) {
         forecastData = []
+        forecastTime = []
+        forecastIcon = []
         for point in data {
             forecastData.append(point.weather[0].description + " \(point.main.temp) ºC")
             forecastTime.append(point.dt_txt)
+            forecastIcon.append(point.weather[0].icon + "@2x.png")
         }
         
         reloadTable()
