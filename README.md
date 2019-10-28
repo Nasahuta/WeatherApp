@@ -7,11 +7,11 @@ User can use gps to get current weather data or type in a city name. Application
 The project set out to accomplish:
 
 - Three tabs: 
-    - 1) current weather
+    1) Current weather
       - Has city name, some weather information, temperature and icon (image) displaying current weather.
-    - 2) weather forecast for 5 days
+    2) Weather forecast for 5 days
       - Has a table view containing 5 day forecast. Each table cell has information for the day and features also a icon.
-    - 3) chosen city
+    3) Chosen city
       - Holds a list of cities in table view. User can add and remove cities. First “city” is “Use GPS”.
 - Connection to weather map api 
 - UI State
