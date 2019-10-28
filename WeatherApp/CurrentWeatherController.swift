@@ -19,7 +19,31 @@ class CurrentWeatherController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //setCity(cityName: "Tampere")
-        apiHandler?.setLocation()
+        let defaultDB = UserDefaults.standard
+        if let data = defaultDB.object(forKey: "object") {
+            print("alota lataus")
+            do {
+                let savedCities = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data as! Data) as! SavedCities
+                if savedCities.selectedCity == "" {
+                    apiHandler?.setLocation()
+                    print("savedCity: \(savedCities.selectedCity)")
+                } else {
+                    setCity(cityName: savedCities.selectedCity)
+                    apiHandler?.currentLocation = savedCities.selectedCity
+                    print("savedCity: \(savedCities.selectedCity)")
+                }
+                if savedCities.cities.count == 0 {
+                    apiHandler?.data.append("Use GPS")
+                } else {
+                    apiHandler?.data = savedCities.cities
+                }
+            } catch {
+                print("Something went wrong with loading in CurrentWeatherController")
+            }
+        } else {
+            print("Elseen meni")
+            apiHandler?.setLocation()
+        }
     }
     
     func alert() {

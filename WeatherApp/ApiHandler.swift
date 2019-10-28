@@ -20,6 +20,7 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
     
     var currentLocation: String?
     var both: Bool = false
+    var data: [String] = []
     
     var locationManager: CLLocationManager?
     var locations : CLLocationCoordinate2D?
@@ -38,6 +39,10 @@ class ApiHandler: NSObject, CLLocationManagerDelegate {
         
         self.locationManager.stopUpdatingLocation()
     }*/
+    
+    func updateCityData(_ data: [String]) {
+        self.data = data
+    }
     
     func setLocation() {
         if CLLocationManager.locationServicesEnabled() {

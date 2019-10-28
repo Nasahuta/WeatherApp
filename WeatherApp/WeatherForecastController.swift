@@ -9,9 +9,7 @@
 import UIKit
 
 class WeatherForecastController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    
-    
+
     var apiHandler: ApiHandler?
     var forecastTime = [String]()
     var forecastData = [String]()

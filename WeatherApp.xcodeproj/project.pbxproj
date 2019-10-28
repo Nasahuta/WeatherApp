@@ -59,6 +59,7 @@
 		06DFE29C23649FB50096A511 /* 03n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DFE28A23649FB50096A511 /* 03n@2x.png */; };
 		06DFE29D23649FB50096A511 /* 13d@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DFE28B23649FB50096A511 /* 13d@2x.png */; };
 		06DFE29E23649FB50096A511 /* 03d@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DFE28C23649FB50096A511 /* 03d@2x.png */; };
+		06EEDC072367146B00A0FDC0 /* SavedCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EEDC062367146B00A0FDC0 /* SavedCities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		06DFE28A23649FB50096A511 /* 03n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03n@2x.png"; sourceTree = "<group>"; };
 		06DFE28B23649FB50096A511 /* 13d@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13d@2x.png"; sourceTree = "<group>"; };
 		06DFE28C23649FB50096A511 /* 03d@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03d@2x.png"; sourceTree = "<group>"; };
+		06EEDC062367146B00A0FDC0 /* SavedCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				06CC2C10234F761800E97DC5 /* CurrentWeatherController.swift */,
 				06CC2C0E234F761800E97DC5 /* ChosenCityController.swift */,
 				06CC2C0F234F761800E97DC5 /* WeatherForecastController.swift */,
+				06EEDC062367146B00A0FDC0 /* SavedCities.swift */,
 				06CC2BFA234F751100E97DC5 /* Main.storyboard */,
 				06CC2BFD234F751B00E97DC5 /* Assets.xcassets */,
 				06CC2BFF234F751B00E97DC5 /* LaunchScreen.storyboard */,
@@ -342,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06EEDC072367146B00A0FDC0 /* SavedCities.swift in Sources */,
 				06CC2BF9234F751100E97DC5 /* ViewController.swift in Sources */,
 				069DA82623509E50007ACAEB /* ApiHandler.swift in Sources */,
 				06CC2C12234F761800E97DC5 /* WeatherForecastController.swift in Sources */,

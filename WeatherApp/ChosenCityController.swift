@@ -23,7 +23,12 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
             data.append(addCityText.text!.capitalized.trimmingCharacters(in: .whitespaces))
             self.citiesTable.reloadData()
             addCityText.text = nil
+            apiHandler?.updateCityData(data)
         }
+    }
+    
+    func getCities() -> [String] {
+        return self.data
     }
     
     func alert() {
@@ -50,10 +55,8 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    
-        data.append("Use GPS")
-        data.append("Tampere")
-        data.append("Helsinki")
+        
+        data = (apiHandler?.data)!
         
         citiesTable.dataSource = self
         citiesTable.delegate = self
@@ -84,6 +87,7 @@ class ChosenCityController: UIViewController, UITableViewDataSource, UITableView
             data.remove(at: indexPath.row)
             citiesTable.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
             citiesTable.endUpdates()
+            apiHandler?.updateCityData(data)
         }
     }
     
